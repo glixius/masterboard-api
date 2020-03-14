@@ -7,6 +7,7 @@ const express = require('express');
 // Third-party imports
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
+const Airtable = require('airtable');
 
 /* ––
  * –––– Schema definition
@@ -18,10 +19,25 @@ const schema = buildSchema(`
 `);
 
 /* ––
+ * –––– Datasource connection
+ * –––––––––––––––––––––––––––––––– */
+Airtable.configure({
+  endpointUrl: 'https://api.airtable.com',
+  apiKey: 'keyOEWZiDgb94JtoB',
+});
+
+const masterboardBase = Airtable.base('appQUH4JNbaicMWHt');
+
+/* ––
  * –––– Resolver declaration
  * –––––––––––––––––––––––––––––––– */
 const root = {
-  hello: () => 'Masterboard API is here for you! 👋🏽',
+  hello: async () => {
+    const competitor = await masterboardBase('Competitors').find(
+      'rectTNXF39gMvWh8W'
+    );
+    return competitor.get('Nickname');
+  },
 };
 
 /* ––
