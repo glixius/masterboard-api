@@ -21,12 +21,7 @@ const schema = buildSchema(`
 /* ––
  * –––– Datasource connection
  * –––––––––––––––––––––––––––––––– */
-Airtable.configure({
-  endpointUrl: 'https://api.airtable.com',
-  apiKey: 'keyOEWZiDgb94JtoB',
-});
-
-const masterboardBase = Airtable.base('appQUH4JNbaicMWHt');
+const masterboardBase = Airtable.base(process.env.AIRTABLE_MASTERBOARD_BASE);
 
 /* ––
  * –––– Resolver declaration
@@ -50,9 +45,9 @@ application.use(
   graphqlHTTP({
     schema,
     rootValue: root,
-    graphiql: true,
+    graphiql: process.env.GRAPHIQL_ENABLED,
   })
 );
 
-application.listen(3000);
-console.log('🚀🚀 Masterboard API v1.0.0-alpha.0 🚀🚀');
+application.listen(process.env.PORT);
+console.log(`🚀🚀 Masterboard API v${process.env.npm_package_version} 🚀🚀`);
