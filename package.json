@@ -1,0 +1,17 @@
+{
+  "name": "masterboard-api",
+  "version": "1.0.0-alpha.0",
+  "description": "API implementation for Masterboard app.",
+  "main": "index.js",
+  "author": "Gilberto López <glr2493@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "~4.17.1",
+    "express-graphql": "~0.9.0",
+    "graphql": "~14.6.0"
+  }
+}
