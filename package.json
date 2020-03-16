@@ -7,11 +7,18 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node index.js"
+    "start": "node -r dotenv/config index.js dotenv_config_path=env/.env",
+    "test": "jest"
   },
   "dependencies": {
+    "airtable": "~0.8.1",
+    "colors": "~1.4.0",
+    "dotenv": "~8.2.0",
     "express": "~4.17.1",
     "express-graphql": "~0.9.0",
     "graphql": "~14.6.0"
+  },
+  "devDependencies": {
+    "jest": "~25.1.0"
   }
 }
