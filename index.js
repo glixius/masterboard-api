@@ -9,6 +9,22 @@ const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
 const Airtable = require('airtable');
 
+// App imports
+const checkEnvironmentVariables = require('./setup/environment-variables');
+
+/* ––
+ * –––– Environment varibles validation
+ * –––––––––––––––––––––––––––––––– */
+console.log(`\n🥇 Masterboard API 🥇`.underline.magenta.bold);
+
+const isEnvironmnetSetup = checkEnvironmentVariables();
+
+if (!isEnvironmnetSetup) {
+  console.log(
+    `🛑  Environment does not meet required variables. Aborting.`.red.bold
+  );
+  return;
+}
 /* ––
  * –––– Schema definition
  * –––––––––––––––––––––––––––––––– */
@@ -38,7 +54,10 @@ const root = {
 /* ––
  * –––– Server initialization
  * –––––––––––––––––––––––––––––––– */
+console.log('🚀  Starting web server\n'.green.underline.bold);
+
 const application = express();
+const port = process.env.PORT || 3000;
 
 application.use(
   '/graphql',
@@ -49,5 +68,9 @@ application.use(
   })
 );
 
-application.listen(process.env.PORT);
-console.log(`🚀🚀 Masterboard API v${process.env.npm_package_version} 🚀🚀`);
+application.listen(port, () => {
+  console.log(
+    `Masterboard API v${process.env.npm_package_version} is running`.green
+  );
+  console.log(`URL: http://localhost:${port}`.green);
+});
