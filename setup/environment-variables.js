@@ -22,7 +22,7 @@ function checkEnvironmentVariables() {
 
   const checkResults = Array.from(environmentVariables.entries()).map(
     ([environmentVariable, required]) => {
-      const value = process.env[environmentVariables];
+      const value = process.env[environmentVariable];
       const headerPrefix = `  🧩  ${environmentVariable}:`;
 
       if (!value && required) {

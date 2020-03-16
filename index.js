@@ -21,7 +21,8 @@ const isEnvironmnetSetup = checkEnvironmentVariables();
 
 if (!isEnvironmnetSetup) {
   console.log(
-    `🛑  Environment does not meet required variables. Aborting.`.red.bold
+    `🛑  Environment does not meet required variables. Check README.md for setting up environment variables. Aborting.`
+      .red.bold
   );
   return;
 }
