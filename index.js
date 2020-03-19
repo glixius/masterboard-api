@@ -6,14 +6,15 @@ const express = require('express');
 
 // Third-party imports
 const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
-const Airtable = require('airtable');
+const playground = require('graphql-playground-middleware-express').default;
 
 // App imports
 const checkEnvironmentVariables = require('./setup/environment-variables');
+const schema = require('./lib/api.schema');
+const rootResolver = require('./lib/resolvers/resolvers');
 
 /* ––
- * –––– Environment varibles validation
+ * –––– Environment validation
  * –––––––––––––––––––––––––––––––– */
 console.log(`\n🥇 Masterboard API 🥇`.underline.magenta.bold);
 
@@ -26,31 +27,6 @@ if (!isEnvironmnetSetup) {
   );
   return;
 }
-/* ––
- * –––– Schema definition
- * –––––––––––––––––––––––––––––––– */
-const schema = buildSchema(`
-    type Query {
-        hello: String
-    }
-`);
-
-/* ––
- * –––– Datasource connection
- * –––––––––––––––––––––––––––––––– */
-const masterboardBase = Airtable.base(process.env.AIRTABLE_MASTERBOARD_BASE);
-
-/* ––
- * –––– Resolver declaration
- * –––––––––––––––––––––––––––––––– */
-const root = {
-  hello: async () => {
-    const competitor = await masterboardBase('Competitors').find(
-      'rectTNXF39gMvWh8W'
-    );
-    return competitor.get('Nickname');
-  },
-};
 
 /* ––
  * –––– Server initialization
@@ -64,14 +40,19 @@ application.use(
   '/graphql',
   graphqlHTTP({
     schema,
-    rootValue: root,
-    graphiql: process.env.GRAPHIQL_ENABLED,
+    rootValue: rootResolver,
   })
 );
 
-application.listen(port, () => {
-  console.log(
-    `Masterboard API v${process.env.npm_package_version} is running`.green
+// Expose playground if enabled.
+if (process.env.PLAYGROUND_ENABLED) {
+  application.get(
+    '/playground',
+    playground({ endpoint: '/graphql', workspaceName: 'Masterboard' })
   );
+}
+
+application.listen(port, () => {
+  console.log(`Masterboard API v${process.env.npm_package_version} is running`.green);
   console.log(`URL: http://localhost:${port}`.green);
 });

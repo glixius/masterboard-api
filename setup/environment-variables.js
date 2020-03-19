@@ -9,7 +9,7 @@ const colors = require('colors');
  * –––––––––––––––––––––––––––––––– */
 const environmentVariables = new Map([
   ['PORT', false],
-  ['GRAPHIQL_ENABLED', false],
+  ['PLAYGROUND_ENABLED', false],
   ['AIRTABLE_API_KEY', true],
   ['AIRTABLE_MASTERBOARD_BASE', true],
 ]);

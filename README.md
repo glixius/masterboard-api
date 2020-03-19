@@ -24,7 +24,7 @@ Finally, our project depends on some environment variables. Whithin `/env` folde
 ## Environment variables
 
 - **PORT:** Server port used for exposing our API.
-- **GRAPHIQL_ENABLED:** Whether GraphiQL will be enabled for debugging.
+- **PLAYGROUND_ENABLED:** Whether GraphQL playground IDE will be available for debugging.
 - **AIRTABLE_API_KEY:** Airtable account API key.
 - **AIRTABLE_MASTERBOARD_BASE:** Airtable's base id.
 
