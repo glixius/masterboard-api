@@ -1,6 +1,5 @@
 /* ––
- * –––– Public API
+ * –––– Exports
  * –––––––––––––––––––––––––––––––– */
-export function getTournament(id: string) {
-  return `Tournament ${id}`;
-}
+export * from './league.service';
+export * from './store-adapter.interface';

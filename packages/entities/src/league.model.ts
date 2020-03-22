@@ -1,20 +1,20 @@
 /* ––
- * –––– Resolver declaration
+ * –––– Entity declaration
  * –––––––––––––––––––––––––––––––– */
-export class LeagueResolver {
+export class League {
   /* –– Properties
    * –––––––––––––––––––––––––––––––– */
   id: string;
   name: string;
   members: string[];
-  code: string;
+  code: string[];
 
   /* –– Constructor
    * –––––––––––––––––––––––––––––––– */
-  constructor(rawObject) {
-    this.id = rawObject.id;
-    this.name = rawObject.get('Name');
-    this.members = rawObject.get('Members');
-    this.code = rawObject.get('Code');
+  constructor(rawData?: any) {
+    this.id = rawData.id || null;
+    this.name = rawData.name || '';
+    this.members = rawData.members || [];
+    this.code = rawData.code || '';
   }
 }

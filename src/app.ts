@@ -12,13 +12,12 @@ import 'colors';
 // App imports
 import { checkEnvironmentVariables } from './setup/environment-variables';
 import { schema } from './lib/api.schema';
-import { rootResolver } from './lib/resolvers/resolvers';
+import { rootResolver } from './lib/resolvers';
 
 /* ––
  * –––– Environment validation
  * –––––––––––––––––––––––––––––––– */
 console.log(`\n🥇 Masterboard API 🥇`.underline.magenta.bold);
-
 const isEnvironmnetSetup = checkEnvironmentVariables();
 
 if (!isEnvironmnetSetup) {

@@ -1,0 +1,13 @@
+{
+  "name": "@masterboard/business-logic",
+  "version": "1.0.0-alpha.0",
+  "description": "Masterboard's business logic package",
+  "main": "lib/index.js",
+  "author": "Gilberto López <glr2493@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf lib"
+  }
+}
