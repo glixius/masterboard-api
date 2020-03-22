@@ -1,7 +1,14 @@
 /* ––
  * –––– Resolver declaration
  * –––––––––––––––––––––––––––––––– */
-class LeagueResolver {
+export class LeagueResolver {
+  /* –– Properties
+   * –––––––––––––––––––––––––––––––– */
+  id: string;
+  name: string;
+  members: string[];
+  code: string;
+
   /* –– Constructor
    * –––––––––––––––––––––––––––––––– */
   constructor(rawObject) {
@@ -11,8 +18,3 @@ class LeagueResolver {
     this.code = rawObject.get('Code');
   }
 }
-
-/* ––
- * –––– Exports
- * –––––––––––––––––––––––––––––––– */
-module.exports = LeagueResolver;

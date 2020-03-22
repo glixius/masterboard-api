@@ -2,12 +2,12 @@
  * –––– Imports
  * –––––––––––––––––––––––––––––––– */
 // Third-party imports
-const { buildSchema } = require('graphql');
+import { buildSchema } from 'graphql';
 
 /* ––
  * –––– Schema definition
  * –––––––––––––––––––––––––––––––– */
-const schema = buildSchema(`
+export const schema = buildSchema(`
   type League {
     id: ID!
     name: String!
@@ -20,8 +20,3 @@ const schema = buildSchema(`
     league(leagueId: String!): League
   }
 `);
-
-/* ––
- * –––– Exports
- * –––––––––––––––––––––––––––––––– */
-module.exports = schema;

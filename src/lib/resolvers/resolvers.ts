@@ -2,13 +2,13 @@
  * –––– Imports
  * –––––––––––––––––––––––––––––––– */
 // App imports
-const { getLeagues, getLeague } = require('../airtable.service');
-const LeagueResolver = require('./league.resolver');
+import { getLeagues, getLeague } from '../airtable.service';
+import { LeagueResolver } from './league.resolver';
 
 /* ––
  * –––– Resolver declaration
  * –––––––––––––––––––––––––––––––– */
-const root = {
+export const rootResolver = {
   league: async ({ leagueId }) => {
     try {
       const league = await getLeague(leagueId);
@@ -22,8 +22,3 @@ const root = {
     return leagues.map(league => new LeagueResolver(league));
   },
 };
-
-/* ––
- * –––– Exports
- * –––––––––––––––––––––––––––––––– */
-module.exports = root;

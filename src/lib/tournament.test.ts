@@ -2,7 +2,7 @@
  * –––– Imports
  * –––––––––––––––––––––––––––––––– */
 // App imports
-const getTournament = require('./tournament');
+import { getTournament } from './tournament';
 
 /* ––
  * –––– Tests declaration
