@@ -10,7 +10,8 @@
     "clean:packages": "yarn workspace @masterboard/entities clean && yarn workspace @masterboard/business-logic clean && yarn workspace @masterboard/adapters clean",
     "clean": "yarn clean:packages && rm -rf dist",
     "build:packages": "yarn workspace @masterboard/entities build && yarn workspace @masterboard/business-logic build && yarn workspace @masterboard/adapters build",
-    "build": "yarn build:packages && tsc",
+    "build:all": "yarn build:packages && tsc",
+    "build": "tsc",
     "start": "node -r dotenv/config dist/app.js dotenv_config_path=env/.env",
     "test": "jest"
   },

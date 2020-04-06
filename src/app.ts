@@ -11,7 +11,7 @@ import 'colors';
 
 // App imports
 import { checkEnvironmentVariables } from './setup/environment-variables';
-import { schema } from './lib/api.schema';
+import { schema } from './lib/schema';
 import { rootResolver } from './lib/resolvers';
 
 /* ––
