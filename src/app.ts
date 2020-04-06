@@ -12,7 +12,6 @@ import 'colors';
 // App imports
 import { checkEnvironmentVariables } from './setup/environment-variables';
 import { schema } from './lib/schema';
-import { rootResolver } from './lib/resolvers';
 
 /* ––
  * –––– Environment validation
@@ -34,13 +33,7 @@ if (!isEnvironmnetSetup) {
   const application = express();
   const port = process.env.PORT || 3000;
 
-  application.use(
-    '/graphql',
-    graphqlHTTP({
-      schema,
-      rootValue: rootResolver,
-    })
-  );
+  application.use('/graphql', graphqlHTTP({ schema }));
 
   // Expose playground if enabled.
   if (process.env.PLAYGROUND_ENABLED) {
