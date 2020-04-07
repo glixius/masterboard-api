@@ -2,23 +2,41 @@
   "name": "masterboard-api",
   "version": "1.0.0-alpha.0",
   "description": "API implementation for Masterboard app.",
-  "main": "index.js",
+  "main": "dist/app.js",
   "author": "Gilberto López <glr2493@gmail.com>",
   "license": "MIT",
-  "private": false,
+  "private": true,
   "scripts": {
-    "start": "node -r dotenv/config index.js dotenv_config_path=env/.env",
+    "clean:packages": "yarn workspace @masterboard/entities clean && yarn workspace @masterboard/business-logic clean && yarn workspace @masterboard/adapters clean",
+    "clean": "yarn clean:packages && rm -rf dist",
+    "build:packages": "yarn workspace @masterboard/entities build && yarn workspace @masterboard/business-logic build && yarn workspace @masterboard/adapters build",
+    "build:all": "yarn build:packages && tsc",
+    "build": "tsc",
+    "start": "yarn build && node -r dotenv/config dist/app.js dotenv_config_path=env/.env",
+    "test:packages": "yarn workspace @masterboard/entities test && yarn workspace @masterboard/business-logic test && yarn workspace @masterboard/adapters test",
+    "test:all": "yarn test:packages && yarn test",
     "test": "jest"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "airtable": "~0.8.1",
     "colors": "~1.4.0",
     "dotenv": "~8.2.0",
     "express": "~4.17.1",
     "express-graphql": "~0.9.0",
-    "graphql": "~14.6.0"
+    "graphql": "~14.6.0",
+    "graphql-playground-middleware-express": "~1.7.12"
   },
   "devDependencies": {
-    "jest": "~25.1.0"
+    "@types/airtable": "~0.5.7",
+    "@types/express": "~4.17.3",
+    "@types/jest": "~25.1.4",
+    "@types/node": "~13.9.2",
+    "jest": "~25.1.0",
+    "ts-jest": "~25.2.1",
+    "tslint": "~6.1.0",
+    "typescript": "~3.8.3"
   }
 }

@@ -1,16 +1,15 @@
 /* ––
  * –––– Imports
  * –––––––––––––––––––––––––––––––– */
+// Third-party imports
+import { GraphQLSchema } from 'graphql';
+
 // App imports
-const getTournament = require('./tournament');
+import { Query } from './query.type';
 
 /* ––
- * –––– Tests declaration
+ * –––– Schema instantiation
  * –––––––––––––––––––––––––––––––– */
-describe('Tournament:', () => {
-  test('should return tournament data', () => {
-    const tournament = getTournament('1234');
-
-    expect(tournament).toBe('Tournament 1234');
-  });
+export const schema = new GraphQLSchema({
+  query: Query,
 });

@@ -1,0 +1,14 @@
+{
+  "name": "@masterboard/entities",
+  "version": "1.0.0-alpha.0",
+  "description": "Masterboard's entities package",
+  "main": "lib/index.js",
+  "author": "Gilberto López <glr2493@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf lib",
+    "test": "jest"
+  }
+}
