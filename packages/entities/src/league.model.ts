@@ -12,9 +12,9 @@ export class League {
   /* –– Constructor
    * –––––––––––––––––––––––––––––––– */
   constructor(rawData?: any) {
-    this.id = rawData.id || null;
-    this.name = rawData.name || '';
-    this.members = rawData.members || [];
-    this.code = rawData.code || '';
+    this.id = (rawData && rawData.id) || null;
+    this.name = (rawData && rawData.name) || '';
+    this.members = (rawData && rawData.members) || [];
+    this.code = (rawData && rawData.code) || '';
   }
 }

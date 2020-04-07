@@ -10,30 +10,30 @@ import { AirtableFramework } from './airtable.framework';
 /* ––
  * –––– Tests arrangement
  * –––––––––––––––––––––––––––––––– */
-// Create required mocks
+// Mocks
 const baseMethodMock = jest.fn().mockReturnValue('Airtable result');
 const selectMethodMock = jest.fn().mockReturnValue({ all: baseMethodMock });
 const baseMock = jest.fn(() => ({ select: selectMethodMock, find: baseMethodMock }));
 const createBaseMock = jest.fn(() => baseMock);
-
-// Mock module
 jest.mock('airtable', () => jest.fn(() => ({ base: createBaseMock })));
+
+// Variables
+let mockedAirtable: jest.Mock;
+
+// Hooks
+beforeEach(() => {
+  mockedAirtable = (Airtable as unknown) as jest.Mock;
+  mockedAirtable.mockClear();
+  createBaseMock.mockClear();
+  baseMock.mockClear();
+  baseMethodMock.mockClear();
+  selectMethodMock.mockClear();
+});
 
 /* ––
  * –––– Tests assertions
  * –––––––––––––––––––––––––––––––– */
 describe('AirtableFramework', () => {
-  let mockedAirtable: jest.Mock;
-
-  beforeEach(() => {
-    mockedAirtable = (Airtable as unknown) as jest.Mock;
-    mockedAirtable.mockClear();
-    createBaseMock.mockClear();
-    baseMock.mockClear();
-    baseMethodMock.mockClear();
-    selectMethodMock.mockClear();
-  });
-
   test('should failed if empty base id is received', () => {
     const errorDescription = 'AirtableFramework: baseId should be valid';
 
@@ -53,12 +53,15 @@ describe('AirtableFramework', () => {
 
   test('should failed methods if no table name is given', () => {
     let framework = new AirtableFramework('baseId');
+    const checkTableNameSpy = jest.spyOn(framework, 'checkTableName');
 
     expect(baseMock).not.toHaveBeenCalled();
     expect(baseMethodMock).not.toHaveBeenCalled();
 
     expect(() => framework.getAll('')).toThrow('AirtableFramework: tableName should be valid');
+    expect(checkTableNameSpy).toHaveBeenCalledTimes(1);
     expect(() => framework.get('', '')).toThrow('AirtableFramework: tableName should be valid');
+    expect(checkTableNameSpy).toHaveBeenCalledTimes(2);
   });
 
   test('should request all records for given table', () => {

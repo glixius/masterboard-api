@@ -12,7 +12,9 @@
     "build:packages": "yarn workspace @masterboard/entities build && yarn workspace @masterboard/business-logic build && yarn workspace @masterboard/adapters build",
     "build:all": "yarn build:packages && tsc",
     "build": "tsc",
-    "start": "node -r dotenv/config dist/app.js dotenv_config_path=env/.env",
+    "start": "yarn build && node -r dotenv/config dist/app.js dotenv_config_path=env/.env",
+    "test:packages": "yarn workspace @masterboard/entities test && yarn workspace @masterboard/business-logic test && yarn workspace @masterboard/adapters test",
+    "test:all": "yarn test:packages && yarn test",
     "test": "jest"
   },
   "workspaces": [

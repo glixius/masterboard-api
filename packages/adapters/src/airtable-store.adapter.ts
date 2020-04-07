@@ -25,7 +25,7 @@ export abstract class AirtableStoreAdapter<T> implements StoreAdapter<T> {
       const airtableRecords = await this.api.getAll(this.schema.tableName);
       return airtableRecords.map(airtableRecord => this.transformRecord(airtableRecord));
     } catch (_) {
-      return Promise.reject('Error: Could not retrieve values');
+      throw new Error('AirtableApiAdapter: Could not retrieve records');
     }
   }
 
@@ -35,7 +35,7 @@ export abstract class AirtableStoreAdapter<T> implements StoreAdapter<T> {
 
       return this.transformRecord(airtableRecord);
     } catch (_) {
-      return Promise.reject('Error: Could not retrieve specified value');
+      throw new Error('AirtableApiAdapter: Could not retrieve specified record');
     }
   }
 
@@ -44,12 +44,16 @@ export abstract class AirtableStoreAdapter<T> implements StoreAdapter<T> {
   abstract transformRecord(AirtableRecord: AirtableRecord): T;
 
   convertToRaw(airtableRecord: AirtableRecord) {
-    return this.schema.fields.reduce(
-      (rawObject, { source, transform }) => {
-        rawObject[transform] = airtableRecord.get(source);
-        return rawObject;
-      },
-      { id: airtableRecord.id }
-    );
+    try {
+      return this.schema.fields.reduce(
+        (rawObject, { source, transform }) => {
+          rawObject[transform] = airtableRecord.get(source) || null;
+          return rawObject;
+        },
+        { id: airtableRecord.id }
+      );
+    } catch (_) {
+      return airtableRecord;
+    }
   }
 }

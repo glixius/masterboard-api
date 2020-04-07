@@ -22,11 +22,23 @@ export class LeagueController {
 
   /* –– Public API
    * –––––––––––––––––––––––––––––––– */
-  getLeagues() {
-    return this.leagueService.getLeagues();
+  async getLeagues() {
+    try {
+      return await this.leagueService.getLeagues();
+    } catch (_) {
+      return null;
+    }
   }
 
-  getLeague(id: string) {
-    return this.leagueService.getLeague(id);
+  async getLeague(id: string) {
+    if (!id) {
+      return null;
+    }
+
+    try {
+      return await this.leagueService.getLeague(id);
+    } catch (_) {
+      return null;
+    }
   }
 }

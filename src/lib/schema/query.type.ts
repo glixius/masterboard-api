@@ -18,14 +18,9 @@ const leagueController = new LeagueController(airtable);
 /* ––
  * –––– Resolvers declaration
  * –––––––––––––––––––––––––––––––– */
-const getLeagues = async () => await leagueController.getLeagues();
-const getLeague = async (_: any, { leagueId }: { leagueId: string }) => {
-  try {
-    return await leagueController.getLeague(leagueId);
-  } catch (_) {
-    return null;
-  }
-};
+const getLeagues = () => leagueController.getLeagues();
+const getLeague = (_: any, { leagueId }: { leagueId: string }) =>
+  leagueController.getLeague(leagueId);
 
 /* ––
  * –––– Type definition
