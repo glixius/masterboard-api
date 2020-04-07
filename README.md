@@ -44,7 +44,7 @@ For running project you need to run the following commands:
 
 ```shell
 # Compile typescript into javascript
-yarn build
+yarn build:packages
 
 # Run node code.
 yarn start
@@ -56,4 +56,22 @@ You can execute API tests using the following command:
 
 ```shell
 yarn test
+```
+
+You can also use `--watch` flag for development purposes and `--verbose` if you want details about running tests.
+
+If you want to run specific package tests, run the following commands:
+
+```shell
+# Navigate to package folder
+cd packages/__desired-package__
+
+# Run tests
+yarn test
+```
+
+If you want to run all tests, execute the following command.
+
+```shell
+yarn test:all
 ```
