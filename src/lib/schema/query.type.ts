@@ -5,27 +5,13 @@
 import { GraphQLObjectType, GraphQLNonNull, GraphQLList, GraphQLString } from 'graphql';
 
 // App imports
-import { League } from './league.type';
-import { AirtableFramework } from '../airtable.framework';
-import { LeagueController } from '@masterboard/adapters';
-
-/* ––
- * –––– Framework initialization
- * –––––––––––––––––––––––––––––––– */
-const airtable = new AirtableFramework(process.env.AIRTABLE_MASTERBOARD_BASE);
-const leagueController = new LeagueController(airtable);
-
-/* ––
- * –––– Resolvers declaration
- * –––––––––––––––––––––––––––––––– */
-const getLeagues = () => leagueController.getLeagues();
-const getLeague = (_: any, { leagueId }: { leagueId: string }) =>
-  leagueController.getLeague(leagueId);
+import { League, getLeague, getLeagues } from './league.type';
+import { Competitor, getCompetitor, getCompetitors } from './competitor.type';
 
 /* ––
  * –––– Type definition
  * –––––––––––––––––––––––––––––––– */
-export const Query = new GraphQLObjectType({
+export const Query = new GraphQLObjectType<any, any, any>({
   name: 'Query',
   description: 'Masterboard query type',
   fields: {
@@ -45,6 +31,24 @@ export const Query = new GraphQLObjectType({
         },
       },
       resolve: getLeague,
+    },
+
+    competitors: {
+      type: new GraphQLNonNull(new GraphQLList(Competitor)),
+      description: 'Query for retrieving all registered competitors',
+      resolve: getCompetitors,
+    },
+
+    competitor: {
+      type: Competitor,
+      description: 'Query for retrieving an specific competitor object based on passed in id',
+      args: {
+        competitorId: {
+          type: new GraphQLNonNull(GraphQLString),
+          description: 'Competitor unique identifier',
+        },
+      },
+      resolve: getCompetitor,
     },
   },
 });
