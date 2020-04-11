@@ -17,3 +17,15 @@ export const leagueSchema: AirtableRecordSchema = {
     { source: 'Code', transform: 'code' },
   ],
 };
+
+export const competitorSchema: AirtableRecordSchema = {
+  tableName: 'Competitors',
+  fields: [
+    { source: 'Email', transform: 'email' },
+    { source: 'Firstname', transform: 'firstname' },
+    { source: 'Lastname', transform: 'lastname' },
+    { source: 'Nickname', transform: 'nickname' },
+    { source: 'Display name', transform: 'displayName' },
+    { source: 'Leagues', transform: 'leagues' },
+  ],
+};

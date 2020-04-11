@@ -23,7 +23,7 @@ export const Query = new GraphQLObjectType<any, any, any>({
 
     league: {
       type: League,
-      description: 'Query for retrieving an specific league object based on passed in id',
+      description: 'Query for retrieving a specific league object based on passed in id',
       args: {
         leagueId: {
           type: new GraphQLNonNull(GraphQLString),
@@ -41,7 +41,7 @@ export const Query = new GraphQLObjectType<any, any, any>({
 
     competitor: {
       type: Competitor,
-      description: 'Query for retrieving an specific competitor object based on passed in id',
+      description: 'Query for retrieving a specific competitor object based on passed in id',
       args: {
         competitorId: {
           type: new GraphQLNonNull(GraphQLString),
