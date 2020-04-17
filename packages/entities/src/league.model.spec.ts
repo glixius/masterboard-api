@@ -7,7 +7,11 @@ import { League } from './league.model';
 /* ––
  * –––– Tests assertions
  * –––––––––––––––––––––––––––––––– */
-describe('League model', () => {
+describe('League', () => {
+  test('should instantiate with no errors', () => {
+    expect(() => new League()).not.toThrowError();
+  });
+
   test('should assign default values if no raw object is passed in', () => {
     const league = new League();
 

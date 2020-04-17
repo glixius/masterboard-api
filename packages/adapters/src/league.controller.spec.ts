@@ -70,7 +70,6 @@ describe('LeagueController', () => {
 
   test('should return null if no valid id is passed in', () => {
     const leagueController = new LeagueController(airtableApiMock);
-    const leagueServiceInstance: { getLeague: jest.Mock } = leagueServiceMock.mock.instances[0];
 
     const result = leagueController.getLeague('');
     const result2 = leagueController.getLeague(undefined);
