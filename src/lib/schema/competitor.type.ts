@@ -6,18 +6,14 @@ import { GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLString, GraphQLLis
 
 // App imports
 import { League, buildSourceLeaguesResolver } from './league.type';
+import { CompetitorController } from '@masterboard/adapters';
+import { AirtableFramework } from '../airtable.framework';
 
 /* ––
  * –––– Framework initialization
  * –––––––––––––––––––––––––––––––– */
-const competitorController = {
-  getCompetitor(competitorId: string) {
-    return { id: '', email: '', leagues: [''] };
-  },
-  getCompetitors() {
-    return [];
-  },
-};
+const airtable = new AirtableFramework(process.env.AIRTABLE_MASTERBOARD_BASE);
+const competitorController = new CompetitorController(airtable);
 
 /* ––
  * –––– Resolvers declaration
@@ -70,7 +66,7 @@ export const Competitor = new GraphQLObjectType({
       description: `Competitor nickname`,
     },
     leagues: {
-      type: new GraphQLNonNull(new GraphQLList(League)),
+      type: new GraphQLList(new GraphQLNonNull(League)),
       description: `Competitor's associated leagues`,
       resolve: buildSourceLeaguesResolver('leagues'),
     },

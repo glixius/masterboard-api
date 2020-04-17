@@ -16,7 +16,7 @@ export const Query = new GraphQLObjectType<any, any, any>({
   description: 'Masterboard query type',
   fields: {
     leagues: {
-      type: new GraphQLNonNull(new GraphQLList(League)),
+      type: new GraphQLList(new GraphQLNonNull(League)),
       description: 'Query for retrieving a list of leagues',
       resolve: getLeagues,
     },
@@ -34,7 +34,7 @@ export const Query = new GraphQLObjectType<any, any, any>({
     },
 
     competitors: {
-      type: new GraphQLNonNull(new GraphQLList(Competitor)),
+      type: new GraphQLList(new GraphQLNonNull(Competitor)),
       description: 'Query for retrieving all registered competitors',
       resolve: getCompetitors,
     },

@@ -52,7 +52,7 @@ export const League = new GraphQLObjectType({
       description: `Invitation code for joining this league`,
     },
     members: {
-      type: new GraphQLNonNull(new GraphQLList(Competitor)),
+      type: new GraphQLList(new GraphQLNonNull(Competitor)),
       description: 'List of competitors associated with this league',
       resolve: buildSourceCompetitorsResolver('members'),
     },
