@@ -29,3 +29,19 @@ export const competitorSchema: AirtableRecordSchema = {
     { source: 'Leagues', transform: 'leagues' },
   ],
 };
+
+export const sportFormatsSchema: AirtableRecordSchema = {
+  tableName: 'Sport Formats',
+  fields: [
+    { source: 'Name', transform: 'name' },
+    { source: 'Sport', transform: 'sport' },
+  ],
+};
+
+export const sportsSchema: AirtableRecordSchema = {
+  tableName: 'Sports',
+  fields: [
+    { source: 'Name', transform: 'email' },
+    { source: 'Sport Formats', transform: 'formats' },
+  ],
+};
