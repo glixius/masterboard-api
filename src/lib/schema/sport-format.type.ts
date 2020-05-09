@@ -44,7 +44,7 @@ export const buildSourceSportFormatResolver = (property: string) => {
  * –––––––––––––––––––––––––––––––– */
 export const SportFormat = new GraphQLObjectType({
   name: 'SportFormat',
-  description: 'A specific game mode for a sport',
+  description: 'A specific ruleset mode derived from a particular sport',
   fields: () => ({
     id: {
       type: new GraphQLNonNull(GraphQLID),
