@@ -23,6 +23,10 @@ This is a monorepo project with workspaces based on [Clean Architecture](https:/
 - `@masterboard/adapters`: Application interface adapters for implementing frameworks.
 - `masterboard-api`: Masterboard's web API implementation. This is the repository's root project.
 
+## Database
+
+Masterboard uses Airtable platform for storing data. You can create your base from [this template](https://airtable.com/shrZLtOXCVCwQPZI7).
+
 ## API
 
 This API expose the following entities. Use them based on your needs:
