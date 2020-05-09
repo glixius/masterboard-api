@@ -41,7 +41,7 @@ export const sportFormatsSchema: AirtableRecordSchema = {
 export const sportsSchema: AirtableRecordSchema = {
   tableName: 'Sports',
   fields: [
-    { source: 'Name', transform: 'email' },
+    { source: 'Name', transform: 'name' },
     { source: 'Sport Formats', transform: 'formats' },
   ],
 };

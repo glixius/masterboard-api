@@ -18,6 +18,8 @@ export class AirtableSportFormatAdapter extends AirtableStoreAdapter<SportFormat
   /* –– Helper methods
    * –––––––––––––––––––––––––––––––– */
   transformRecord(airtableRecord: AirtableRecord) {
-    return new SportFormat(this.convertToRaw(airtableRecord));
+    const rawData = this.convertToRaw(airtableRecord) as SportFormat;
+    rawData.sport = (Array.isArray(rawData.sport) && rawData.sport.pop()) || null;
+    return new SportFormat(rawData);
   }
 }

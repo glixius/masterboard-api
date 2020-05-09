@@ -73,4 +73,62 @@ describe('AirtableSportFormatAdapter', () => {
     expect(convertToRawSpy).toHaveBeenCalledTimes(1);
     expect(SportFormat).toHaveBeenCalledTimes(1);
   });
+
+  test('should convert sports array into single sport id', () => {
+    const adapter = new AirtableSportFormatAdapter(new airtableApiMock());
+    const convertToRawSpy = jest
+      .spyOn(adapter, 'convertToRaw')
+      .mockImplementation((record) => record);
+
+    const sportFormat = adapter.transformRecord({
+      id: '1',
+      name: 'Sport format name',
+      sport: ['sportId'],
+      get() {},
+    } as AirtableRecord);
+
+    expect(sportFormat).toBeInstanceOf(SportFormat);
+    expect(convertToRawSpy).toHaveBeenCalledTimes(1);
+    expect(SportFormat).toHaveBeenCalledTimes(1);
+
+    const [formattedRecord] = (SportFormat as jest.Mock).mock.calls[0];
+
+    expect(formattedRecord.sport).toBeDefined();
+    expect(formattedRecord.sport).toBe('sportId');
+  });
+
+  test('should default to null when no sport id is given', () => {
+    const adapter = new AirtableSportFormatAdapter(new airtableApiMock());
+    const convertToRawSpy = jest
+      .spyOn(adapter, 'convertToRaw')
+      .mockImplementation((record) => record);
+
+    const sportFormat = adapter.transformRecord({
+      id: '1',
+      name: 'Sport name',
+      sport: 'another sport id',
+      get() {},
+    } as AirtableRecord);
+
+    expect(sportFormat).toBeInstanceOf(SportFormat);
+    expect(convertToRawSpy).toHaveBeenCalledTimes(1);
+    expect(SportFormat).toHaveBeenCalledTimes(1);
+
+    const [formattedRecord] = (SportFormat as jest.Mock).mock.calls[0];
+    expect(formattedRecord.sport).toBeNull();
+
+    const sportFormat2 = adapter.transformRecord({
+      id: '1',
+      name: 'Sport name',
+      sport: { id: 'sportId' },
+      get() {},
+    } as AirtableRecord);
+
+    expect(sportFormat2).toBeInstanceOf(SportFormat);
+    expect(convertToRawSpy).toHaveBeenCalledTimes(2);
+    expect(SportFormat).toHaveBeenCalledTimes(2);
+
+    const [formattedRecord2] = (SportFormat as jest.Mock).mock.calls[1];
+    expect(formattedRecord2.sport).toBeNull();
+  });
 });
