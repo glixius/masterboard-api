@@ -7,6 +7,8 @@ import { GraphQLObjectType, GraphQLNonNull, GraphQLList, GraphQLString } from 'g
 // App imports
 import { League, getLeague, getLeagues } from './league.type';
 import { Competitor, getCompetitor, getCompetitors } from './competitor.type';
+import { SportFormat, getSportFormat, getSportFormats } from './sport-format.type';
+import { Sport, getSport, getSports } from './sport.type';
 
 /* ––
  * –––– Type definition
@@ -49,6 +51,42 @@ export const Query = new GraphQLObjectType<any, any, any>({
         },
       },
       resolve: getCompetitor,
+    },
+
+    sportFormats: {
+      type: new GraphQLList(new GraphQLNonNull(SportFormat)),
+      description: 'Query for retrieving all registered sport formats',
+      resolve: getSportFormats,
+    },
+
+    sportFormat: {
+      type: SportFormat,
+      description: 'Query for retrieving a specific sport format object based on passed in id',
+      args: {
+        sportFormatId: {
+          type: new GraphQLNonNull(GraphQLString),
+          description: 'Sport format unique identifier',
+        },
+      },
+      resolve: getSportFormat,
+    },
+
+    sports: {
+      type: new GraphQLList(new GraphQLNonNull(Sport)),
+      description: 'Query for retrieving all registered sports',
+      resolve: getSports,
+    },
+
+    sport: {
+      type: Sport,
+      description: 'Query for retrieving a specific sport object based on passed in id',
+      args: {
+        sportId: {
+          type: new GraphQLNonNull(GraphQLString),
+          description: 'Sport unique identifier',
+        },
+      },
+      resolve: getSport,
     },
   },
 });

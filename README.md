@@ -23,6 +23,21 @@ This is a monorepo project with workspaces based on [Clean Architecture](https:/
 - `@masterboard/adapters`: Application interface adapters for implementing frameworks.
 - `masterboard-api`: Masterboard's web API implementation. This is the repository's root project.
 
+## Database
+
+Masterboard uses Airtable platform for storing data. You can create your base from [this template](https://airtable.com/shrZLtOXCVCwQPZI7).
+
+## API
+
+This API expose the following entities. Use them based on your needs:
+
+- **Competitor**: A user member of any Materboard league.
+- **League**: A competitors organization for running sport tournaments.
+- **Sport**: A discipline based on predefined rules with competitive purposes.
+- **SportFormat**: A specific ruleset mode derived from a particular sport.
+
+You could find complete documentation on GraphQL Schema documentation after [running this project](#running).
+
 ## Setup
 
 In order to setup your environment you need to have `node` and `yarn` installed globally. Once you have them run `yarn` command to install project dependencies.
